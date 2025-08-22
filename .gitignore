@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+reactapp/node_modules/
+
+# Vite build outputs
+dist/
+reactapp/dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor/OS
+.vscode/
+.DS_Store
