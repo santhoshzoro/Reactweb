@@ -17,7 +17,7 @@ import Wiki from './Wiki';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/Reactweb">
       <Routes>
         {/* Login page without footer */}
         <Route path="/" element={<Login />} />
