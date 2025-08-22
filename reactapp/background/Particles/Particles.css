@@ -1,0 +1,54 @@
+.particles-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Ensure particles are responsive on all screen sizes */
+@media screen and (max-width: 1200px) {
+  .particles-container {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .particles-container {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .particles-container {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+/* Make sure canvas is properly sized */
+.particles-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Add animation for particles */
+@keyframes particleFade {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.particles-container canvas {
+  animation: particleFade 5s infinite;
+}

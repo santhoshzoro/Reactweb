@@ -1,0 +1,450 @@
+/* Base styles */
+body {
+  background: #121212;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+.dashboard-inner {
+  padding-top: 0;
+  width: 100%;
+}
+
+/* Navbar */
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  cursor: pointer;
+  width: 90%;
+  max-width: 950px;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: white;
+  box-shadow: 0 0 10px #00c9ff, 0 0 20px #00c9ff, 0 0 40px #00c9ff !important;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+}
+
+.logo img {
+  height: 24px;
+  width: 24px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s, transform 0.2s;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+
+/* Content Layout */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Welcome Section */
+.welcome-section {
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  margin-top: 400px; /* Default for pages with navbar */
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Welcome section for pages without navbar */
+.content[style*="marginTop: '20px'"] .welcome-section {
+  margin-top: 10px !important;
+}
+
+/* Content container for pages without navbar */
+.content[style*="marginTop: '20px'"] {
+  padding-top: 20px !important;
+  margin-top: 20px !important;
+}
+
+.welcome-section h2 {
+  margin: 0;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+.welcome-section p {
+  color: #aaa;
+  margin: 5px 0 0 0;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Cards */
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(5px, 3vw, 10px);
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.card {
+  background: #222;
+  padding: 10px 8px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.8s ease-out forwards;
+  height: auto;
+  min-height: 130px;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(0, 201, 255, 0.5);
+}
+
+.card h3 {
+  color: #0ff;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin: 0;
+}
+
+.card p {
+  margin: 0 0 0 0;
+  color: #bbb;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+}
+
+/* Stats layout inside cards */
+.employee-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+  gap: 5px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  min-width: 10px;
+}
+
+.stat-value {
+  font-size: 11px;
+  color: #0ff;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #aaa;
+  margin-top: 3px;
+  line-height: 1;
+}
+
+/* Animation for stats */
+.stat-item {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.stat-item:nth-child(1) { animation-delay: 0.1s; }
+.stat-item:nth-child(2) { animation-delay: 0.2s; }
+.stat-item:nth-child(3) { animation-delay: 0.3s; }
+
+@media (max-width: 576px) {
+  .employee-stats {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  .stat-item {
+    margin: 5px;
+    min-width: 50px;
+  }
+}
+
+/* Charts */
+.charts-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+  width: 100%;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.chart-box {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-box h3 {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.chart-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px rgba(0, 201, 255, 0.3);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 5px rgba(0, 201, 255, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(0, 201, 255, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(0, 201, 255, 0.3); }
+}
+
+.stats-cards .card:nth-child(1) { animation-delay: 0.1s; }
+.stats-cards .card:nth-child(2) { animation-delay: 0.2s; }
+.stats-cards .card:nth-child(3) { animation-delay: 0.3s; }
+.stats-cards .card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Responsive Media Queries */
+@media screen and (max-width: 1200px) {
+  .charts-row {
+    grid-template-columns: 3fr 2fr;
+  }
+  
+  .stats-cards {
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .stats-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+  
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .welcome-section {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Navbar {
+    width: 85%;
+    padding: 8px 15px;
+  }
+  
+  .nav-links {
+    gap: 12px;
+  }
+  
+  .welcome-section {
+    margin-top: 180px;
+    padding: 8px;
+  }
+  
+  .card {
+    padding: 8px 6px;
+    min-height: 120px;
+  }
+  
+  .chart-box {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .stats-cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .Navbar {
+    width: 90%;
+    padding: 8px 12px;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 15px;
+  }
+  
+  .nav-links {
+    width: 100%;
+    justify-content: space-around;
+    font-size: 0.9rem;
+  }
+  
+  .welcome-section {
+    margin-top: 180px;
+    margin-bottom: 10px;
+    padding: 6px;
+  }
+  
+  .card {
+    min-height: 110px;
+    padding: 8px 6px;
+  }
+  
+  .employee-stats {
+    margin-top: 3px;
+  }
+  
+  .stat-item {
+    margin: 0;
+  }
+  
+  .charts-row {
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .welcome-section {
+    margin-top: 180px;
+  }
+  
+  .welcome-section h2 {
+    font-size: 1rem;
+  }
+  
+  .welcome-section p {
+    font-size: 0.75rem;
+  }
+  
+  .card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .card p {
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+  
+  .chart-box {
+    padding: 6px;
+  }
+  
+  .chart-box h3 {
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+  }
+  
+  .employee-stats {
+    margin-top: 2px;
+  }
+  
+  .stat-value {
+    font-size: 9px;
+  }
+  
+  .stat-label {
+    font-size: 7px;
+    margin-top: 2px;
+  }
+  
+  .stats-cards {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .card {
+    min-height: 100px;
+    padding: 6px 4px;
+  }
+}
+/* Icon styles */
+.card svg {
+  height: 10px;
+  width: 14px;
+  margin-left: 0;
+  background-color: #03e9f4;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 5px;
+}
+
+/* Back button styles */
+.back-button-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.back-button {
+  background: linear-gradient(45deg, #03e9f4, #00c9ff) !important;
+  border: none !important;
+  padding: 12px 24px !important;
+  border-radius: 25px !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(3, 233, 244, 0.3) !important;
+}
+
+.back-button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(3, 233, 244, 0.4) !important;
+}
+
+@media screen and (max-width: 768px) {
+  .back-button {
+    padding: 10px 20px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .back-button {
+    padding: 8px 16px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* Additional employee-stats styles for specific layouts */

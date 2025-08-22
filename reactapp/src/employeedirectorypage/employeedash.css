@@ -1,0 +1,32 @@
+.employee-directory {
+  padding: 20px;
+}
+
+.employee-directory h1 {
+  margin-bottom: 5px;
+  color: #2c3e50;
+}
+
+.subtitle {
+  margin-top: 0;
+  color: #7f8c8d;
+  margin-bottom: 30px;
+}
+
+.directory-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.showing-count {
+  color: #7f8c8d;
+  font-size: 14px;
+}
+
+.employee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}

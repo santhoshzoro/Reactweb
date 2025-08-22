@@ -1,0 +1,48 @@
+.light-rays-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+}
+
+/* Ensure light rays are responsive on all screen sizes */
+@media screen and (max-width: 1200px) {
+  .light-rays-container {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .light-rays-container {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .light-rays-container {
+    height: 100vh;
+    width: 100vw;
+  }
+}
+
+/* Animation for light rays */
+@keyframes rayPulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+/* Apply animation to light rays if needed */
+.light-rays-container canvas {
+  animation: rayPulse 4s infinite;
+}

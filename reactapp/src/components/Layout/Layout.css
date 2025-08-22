@@ -1,0 +1,26 @@
+/* Layout Styles */
+.layout-container {
+  min-height: 100vh;
+  display: block; /* Changed from flex to block to avoid layout interference */
+  background: inherit; /* Inherit background from page components */
+}
+
+.main-content {
+  /* Remove flex properties to avoid interfering with existing layouts */
+  position: relative;
+  width: 100%;
+}
+
+/* Ensure the layout doesn't interfere with existing page styles */
+.layout-container .main-content > .dashboard-container,
+.layout-container .main-content > .dashboard-inner,
+.layout-container .main-content > .employee-directory {
+  min-height: 100vh; /* Restore original min-height */
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .layout-container {
+    min-height: 100vh;
+  }
+}
