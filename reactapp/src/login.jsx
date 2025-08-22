@@ -5,22 +5,30 @@ import LightRays from '../lightrayslogin/LightRays/LightRays';
 
 
 function Login() {
-  const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate(); // enable routing after login
 
-  function handleLogin() {
-    alert("Login successful!");
-    navigate('/dashboard');
-  }
+    // Hardcoded credentials (later you can replace with API call)
+    const validEmail = "test@example.com";
+    const validPassword = "123456";
 
-  
+    function handleLogin() {
+        if (email === validEmail && password === validPassword) {
+            alert("Login successful!");
+            navigate("/dashboard");
+        } else {
+            alert("Invalid email or password. Please try again.");
+        }
+    }
 
 
 
-    return(
+    return (
         <>
             {/* LightRays Background Effect */}
             <div className="light-rays-background">
-                <LightRays 
+                <LightRays
                     raysOrigin="top-center"
                     raysColor="#03e9f4"
                     raysSpeed={1.2}
@@ -32,21 +40,32 @@ function Login() {
                     mouseInfluence={0.15}
                 />
             </div>
-            
+
             {/* Login Form */}
             <div className="container">
                 <div className="card">
                     <h2 className="title">Welcome Back</h2>
-                    <div className="inputBox">
-                        <input type="text" required />
-                        <span>Email</span>
-                    </div>
-                    <div className="inputBox">
-                        <input type="password" required />
-                        <span>Password</span>
-                    </div>
-                    <button className="loginBtn"  onClick={handleLogin}>Sign In</button>
-                    
+                        <div className="inputBox">
+                            <input
+                                type="text"
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                            <span>Email</span>
+                        </div>
+                        <div className="inputBox">
+                            <input
+                                type="password"
+                                required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <span>Password</span>
+                        </div>
+            
+                    <button className="loginBtn" onClick={handleLogin}>Sign In</button>
+
                 </div>
             </div>
         </>

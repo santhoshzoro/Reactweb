@@ -16,8 +16,11 @@ import Wiki from './Wiki';
 
 
 function App() {
+  // Use Vite's BASE_URL so dev is '/', prod is '/Reactweb/' - strip trailing slash
+  const basename = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
+
   return (
-    <BrowserRouter basename="/Reactweb">
+    <BrowserRouter basename={basename}>
       <Routes>
         {/* Login page without footer */}
         <Route path="/" element={<Login />} />
