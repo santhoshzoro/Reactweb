@@ -28,7 +28,7 @@ function dashboard() {
             {/* Fixed Navbar */}
             <div className='Navbar'>
                 <div className="logo">
-                    <img src={new URL('./assets/techno.png', import.meta.url).href} alt="Techno Logo" />
+                    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968381.png" alt="Logo" />
                     Techno
                 </div>
                 <div className='nav-links'>

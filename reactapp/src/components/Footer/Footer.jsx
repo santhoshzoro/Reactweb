@@ -10,8 +10,7 @@ const Footer = () => {
         <div className="footer-section company-section">
           <div className="footer-logo">
             <div className="logo-icon">
-              {/* Importing logo from assets ensures it works in dev and GitHub Pages */}
-              <img src={new URL('../../assets/techno.png', import.meta.url).href} alt="Techno Logo" />
+              <img src={new URL('../../assets/techno.png', import.meta.url).href} alt="Logo" />
             </div>
             <span className="company-name">Techno</span>
           </div>

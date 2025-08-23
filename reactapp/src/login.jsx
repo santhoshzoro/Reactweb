@@ -40,14 +40,17 @@ function Login() {
                     mouseInfluence={0.15}
                 />
             </div>
-
-            {/* Welcome animated heading */}
+            <div>
+                 {/* Welcome animated heading */}
             <h1 className="welcome-hero">Welcome to Techno corp</h1>
+            </div>
+            <br />
+            
 
             {/* Login Form */}
             <div className="container">
                 <div className="card">
-                    <h2 className="title">Welcome Back</h2>
+                    <h2 className="title">Login</h2>
                         <div className="inputBox">
                             <input
                                 type="text"
