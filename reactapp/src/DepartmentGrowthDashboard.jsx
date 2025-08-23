@@ -170,7 +170,7 @@ const DepartmentGrowthDashboard = () => {
 
         <section className="stats-cards">
           <div className="card">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "90px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "110px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
               <path d="M320-414v-306h120v306l-60-56-60 56Zm200 60v-526h120v406L520-354ZM120-216v-344h120v224L120-216Zm0 98 258-258 142 122 224-224h-64v-80h200v200h-80v-64L524-146 382-268 232-118H120Z"/>
             </svg>
             <h3>8</h3>
@@ -192,7 +192,7 @@ const DepartmentGrowthDashboard = () => {
           </div>
 
           <div className="card">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "90px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "105px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
               <path d="M0-240v-63q0-43 44-70t116-27q13 0 25 .5t23 2.5q-14 21-21 44t-7 48v65H0Zm240 0v-65q0-32 17.5-58.5T307-410q32-20 76.5-30t96.5-10q53 0 97.5 10t76.5 30q32 20 49 46.5t17 58.5v65H240Zm540 0v-65q0-26-6.5-49T754-397q11-2 22.5-2.5t23.5-.5q72 0 116 26.5t44 70.5v63H780ZM160-440q-33 0-56.5-23.5T80-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T160-440Zm640 0q-33 0-56.5-23.5T720-520q0-34 23.5-57t56.5-23q34 0 57 23t23 57q0 33-23 56.5T800-440Zm-320-40q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T600-600q0 50-34.5 85T480-480Z"/>
             </svg>
             <h3>55</h3>
@@ -214,7 +214,7 @@ const DepartmentGrowthDashboard = () => {
           </div>
 
           <div className="card">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "90px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "110px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
               <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-480H200v480Zm80-80h400L545-450 440-320l-65-87-95 127Zm-80 80v-560 560Z"/>
             </svg>
             <h3>15</h3>
@@ -236,7 +236,7 @@ const DepartmentGrowthDashboard = () => {
           </div>
 
           <div className="card">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "90px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000" style={{marginLeft: "105px", backgroundColor:"#03e9f4", borderRadius:"4px", padding:"20px"}} className='iconshover'>
               <path d="M480-120 200-272v-240L40-600l440-240 440 240-160 88v240L480-120Zm0-332 274-148-274-148-274 148 274 148Zm0 241 200-108v-151L480-360 280-470v151l200 108Zm0-241Zm0 90Zm0 0Z"/>
             </svg>
             <h3>25%</h3>

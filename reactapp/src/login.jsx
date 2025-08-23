@@ -41,6 +41,9 @@ function Login() {
                 />
             </div>
 
+            {/* Welcome animated heading */}
+            <h1 className="welcome-hero">Welcome to Techno corp</h1>
+
             {/* Login Form */}
             <div className="container">
                 <div className="card">
