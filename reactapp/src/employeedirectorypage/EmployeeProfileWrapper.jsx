@@ -8,13 +8,26 @@ const EmployeeProfileWrapper = () => {
   const [employee, setEmployee] = useState(null);
 
   useEffect(() => {
-    // Find the employee with the matching ID
-    const foundEmployee = employeeData.find(emp => emp.id === parseInt(id));
-    setEmployee(foundEmployee);
+    // Prefer dynamic list from localStorage, fallback to static file
+    let source = employeeData;
+    try {
+      const saved = localStorage.getItem('employees');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length) source = parsed;
+      }
+    } catch {}
+    const foundEmployee = source.find(emp => emp.id === parseInt(id));
+    setEmployee(foundEmployee || null);
   }, [id]);
 
   if (!employee) {
-    return <div className="loading-container">Loading employee data...</div>;
+    return (
+      <div className="loading-container" style={{textAlign:'center'}}>
+        <div>Employee not found.</div>
+        <Link to="/employeeDirectory" className="back-button" style={{marginTop:'12px', display:'inline-block'}}>← Back to Directory</Link>
+      </div>
+    );
   }
 
   // Format date to a more readable format

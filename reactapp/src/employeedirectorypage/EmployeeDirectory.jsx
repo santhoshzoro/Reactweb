@@ -9,6 +9,7 @@ import PaginationComponent from './PaginationComponent';
 
 const EmployeeDirectory = () => {
   const navigate = useNavigate();
+  const [employees, setEmployees] = useState(employeeData);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredEmployees, setFilteredEmployees] = useState(employeeData);
   const [searchTerm, setSearchTerm] = useState('');
@@ -16,11 +17,40 @@ const EmployeeDirectory = () => {
   const [statusFilter, setStatusFilter] = useState('All');
   const [sortBy, setSortBy] = useState('name');
   const [sortOrder, setSortOrder] = useState('asc');
+  const [showNewEmp, setShowNewEmp] = useState(false);
+  const [newEmployee, setNewEmployee] = useState({
+    name: '',
+    position: '',
+    department: '',
+    email: '',
+    phone: '',
+    status: 'Active',
+    joinDate: '',
+    image: '',
+    skills: '',
+    projects: '',
+    rating: '4.0'
+  });
   
+  // Load from localStorage on mount (so new employees persist across refresh)
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('employees');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length) {
+          setEmployees(parsed);
+        }
+      }
+    } catch (e) {
+      console.warn('Could not parse saved employees');
+    }
+  }, []);
+
   const employeesPerPage = 9; // Changed from 10 to 9 (3x3 grid)
 
   useEffect(() => {
-    let filtered = employeeData;
+    let filtered = employees;
     
     if (searchTerm) {
       filtered = filtered.filter(employee => 
@@ -57,7 +87,7 @@ const EmployeeDirectory = () => {
     
     setFilteredEmployees(filtered);
     setCurrentPage(1); // Reset to first page when filters change
-  }, [searchTerm, departmentFilter, statusFilter, sortBy, sortOrder]);
+  }, [employees, searchTerm, departmentFilter, statusFilter, sortBy, sortOrder]);
 
   // Get current employees for pagination
   const indexOfLastEmployee = currentPage * employeesPerPage;
@@ -72,7 +102,7 @@ const EmployeeDirectory = () => {
   };
 
   // Get unique departments for filter dropdown
-  const departments = ['All', ...new Set(employeeData.map(employee => employee.department))];
+  const departments = ['All', ...new Set(employees.map(employee => employee.department))];
 
   // Format date
   const formatDate = (dateString) => {
@@ -90,11 +120,63 @@ const EmployeeDirectory = () => {
     }
   };
 
+  // Handle new employee form field changes
+  const handleNewEmpChange = (e) => {
+    const { name, value } = e.target;
+    setNewEmployee((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Submit new employee and append to list
+  const handleAddNewEmp = (e) => {
+    e.preventDefault();
+    const nextId = employees.reduce((max, emp) => Math.max(max, emp.id), 0) + 1;
+    const newEmp = {
+      id: nextId,
+      name: newEmployee.name.trim(),
+      position: newEmployee.position.trim(),
+      department: newEmployee.department.trim(),
+      email: newEmployee.email.trim(),
+      phone: newEmployee.phone.trim(),
+      status: newEmployee.status,
+      joinDate: newEmployee.joinDate,
+      image: newEmployee.image || 'https://via.placeholder.com/150',
+      skills: newEmployee.skills
+        ? newEmployee.skills.split(',').map((s) => s.trim()).filter(Boolean)
+        : [],
+      projects: newEmployee.projects
+        ? newEmployee.projects.split(',').map((p) => p.trim()).filter(Boolean)
+        : [],
+      rating: parseFloat(newEmployee.rating) || 4.0,
+    };
+
+    setEmployees((prev) => {
+      const updated = [...prev, newEmp];
+      // Save to localStorage for persistence
+      try { localStorage.setItem('employees', JSON.stringify(updated)); } catch {}
+      return updated;
+    });
+    setShowNewEmp(false);
+    setNewEmployee({
+      name: '',
+      position: '',
+      department: '',
+      email: '',
+      phone: '',
+      status: 'Active',
+      joinDate: '',
+      image: '',
+      skills: '',
+      projects: '',
+      rating: '4.0',
+    });
+    setCurrentPage(1);
+  };
+
   return (
     <div  className="employee-directory-page">
     <div className="employee-directory">
       <div className="directory-header">
-        <h1>Employee Directory</h1>
+        <h4>Employee Directory</h4>
         <button className="back-button" onClick={() => navigate('/dashboardInner')}>
           Back to Dashboard
         </button>
@@ -158,6 +240,52 @@ const EmployeeDirectory = () => {
               </button>
             </div>
           </div>
+
+          {/* New Employee Section toggle (moved to its own row below filters) */}
+          {/* <div style={{ marginTop: '16px', width: '50%', display: 'flex', justifyContent: 'flex', alignItems: 'center', padding: '10px', borderRadius: '8px', }}> */}
+            <button
+              className="sort-button"
+              
+              style={{ border: '1px solid #03e9f4', padding: '8px 16px', borderRadius: '4px', background: '#111', color: '#03e9f4', cursor: 'pointer',marginLeft: '50px' }}
+              onClick={() => setShowNewEmp(true)}
+            >
+              Add New +
+            </button>
+          {/* </div> */}
+
+          {/* Lightweight modal to prevent layout shift */}
+          {showNewEmp && (
+            <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+              <div style={{ width: 'min(800px, 90vw)', background: '#111', border: '1px solid rgba(3,233,244,0.3)', borderRadius: '10px', padding: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                  <h3 style={{ color: '#03e9f4', margin: 0 }}>New Emp</h3>
+                  <button className="sort-button" onClick={() => setShowNewEmp(false)}>Close</button>
+                </div>
+                <form onSubmit={handleAddNewEmp}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                    <input name="name" value={newEmployee.name} onChange={handleNewEmpChange} placeholder="Name" required className="filter-select" />
+                    <input name="position" value={newEmployee.position} onChange={handleNewEmpChange} placeholder="Position" required className="filter-select" />
+                    <input name="department" value={newEmployee.department} onChange={handleNewEmpChange} placeholder="Department" required className="filter-select" />
+                    <input name="email" value={newEmployee.email} onChange={handleNewEmpChange} placeholder="Email" type="email" required className="filter-select" />
+                    <input name="phone" value={newEmployee.phone} onChange={handleNewEmpChange} placeholder="Phone" required className="filter-select" />
+                    <select name="status" value={newEmployee.status} onChange={handleNewEmpChange} className="filter-select">
+                      <option value="Active">Active</option>
+                      <option value="On Leave">On Leave</option>
+                      <option value="Remote">Remote</option>
+                    </select>
+                    <input name="joinDate" value={newEmployee.joinDate} onChange={handleNewEmpChange} placeholder="Join Date (YYYY-MM-DD)" type="date" required className="filter-select" />
+                    <input name="image" value={newEmployee.image} onChange={handleNewEmpChange} placeholder="Image URL (optional)" className="filter-select" />
+                    <input name="skills" value={newEmployee.skills} onChange={handleNewEmpChange} placeholder="Skills (comma separated)" className="filter-select" />
+                    <input name="projects" value={newEmployee.projects} onChange={handleNewEmpChange} placeholder="Projects (comma separated)" className="filter-select" />
+                    <input name="rating" value={newEmployee.rating} onChange={handleNewEmpChange} placeholder="Rating (0-5)" type="number" step="0.1" min="0" max="5" className="filter-select" />
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '12px' }}>
+                    <button type="submit" className="view-profile-btn">Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
