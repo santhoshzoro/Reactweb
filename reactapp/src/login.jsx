@@ -7,19 +7,20 @@ import LightRays from '../lightrayslogin/LightRays/LightRays';
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState('user'); // demo-only role picker
     const navigate = useNavigate(); // enable routing after login
 
-    // Hardcoded credentials (later you can replace with API call)
-    const validEmail = "test@example.com";
-    const validPassword = "123456";
-
+    // Demo mode: accept any credentials; choose role via dropdown
     function handleLogin() {
-        if (email === validEmail && password === validPassword) {
-            alert("Login successful!");
-            navigate("/dashboard");
-        } else {
-            alert("Invalid email or password. Please try again.");
+        if (!email || !password) {
+            alert("Please enter email and password.");
+            return;
         }
+        try {
+            localStorage.setItem('auth', JSON.stringify({ email, role }));
+        } catch {}
+        alert(`Login successful as ${role}!`);
+        navigate("/dashboard");
     }
 
 
@@ -68,6 +69,15 @@ function Login() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                             <span>Password</span>
+                        </div>
+
+                        {/* Demo-only role picker */}
+                        <div className="inputBox">
+                            <select value={role} onChange={(e) => setRole(e.target.value)}>
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <span>Role</span>
                         </div>
             
                     <button className="loginBtn" onClick={handleLogin}>Sign In</button>

@@ -31,6 +31,18 @@ const EmployeeDirectory = () => {
     projects: '',
     rating: '4.0'
   });
+
+  // Auth and role from localStorage
+  const [auth] = useState(() => {
+    try {
+      const raw = localStorage.getItem('auth');
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  });
+  const isAdmin = auth?.role === 'admin';
+  const currentUserEmail = auth?.email || '';
   
   // Load from localStorage on mount (so new employees persist across refresh)
   useEffect(() => {
@@ -129,6 +141,10 @@ const EmployeeDirectory = () => {
   // Submit new employee and append to list
   const handleAddNewEmp = (e) => {
     e.preventDefault();
+    if (!isAdmin) {
+      alert('Only admins can add new employees.');
+      return;
+    }
     const nextId = employees.reduce((max, emp) => Math.max(max, emp.id), 0) + 1;
     const newEmp = {
       id: nextId,
@@ -243,14 +259,15 @@ const EmployeeDirectory = () => {
 
           {/* New Employee Section toggle (moved to its own row below filters) */}
           {/* <div style={{ marginTop: '16px', width: '50%', display: 'flex', justifyContent: 'flex', alignItems: 'center', padding: '10px', borderRadius: '8px', }}> */}
-            <button
-              className="sort-button"
-              
-              style={{ border: '1px solid #03e9f4', padding: '8px 16px', borderRadius: '4px', background: '#111', color: '#03e9f4', cursor: 'pointer',marginLeft: '50px' }}
-              onClick={() => setShowNewEmp(true)}
-            >
-              Add New +
-            </button>
+            {isAdmin && (
+              <button
+                className="sort-button"
+                style={{ border: '1px solid #03e9f4', padding: '8px 16px', borderRadius: '4px', background: '#111', color: '#03e9f4', cursor: 'pointer', marginLeft: '50px' }}
+                onClick={() => setShowNewEmp(true)}
+              >
+                Add New +
+              </button>
+            )}
           {/* </div> */}
 
           {/* Lightweight modal to prevent layout shift */}
@@ -331,6 +348,23 @@ const EmployeeDirectory = () => {
               <Link to={`/employeeProfile/${employee.id}`} className="view-profile-btn">
                 View Profile
               </Link>
+              {isAdmin && (
+                <button
+                  className="view-profile-btn"
+                  style={{ marginLeft: '8px', backgroundColor: '#8b0000' }}
+                  onClick={() => {
+                    if (confirm(`Delete ${employee.name}?`)) {
+                      setEmployees(prev => {
+                        const updated = prev.filter(e => e.id !== employee.id);
+                        try { localStorage.setItem('employees', JSON.stringify(updated)); } catch {}
+                        return updated;
+                      });
+                    }
+                  }}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         ))}

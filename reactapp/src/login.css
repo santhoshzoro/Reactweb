@@ -105,34 +105,90 @@ body {
   margin-bottom: 15px;
 }
 
-.inputBox input {
+/* Inputs */
+.inputBox input,
+.inputBox select {
   width: 100%;
-  padding: 10px;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid #fff;
-  color: #fff;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  color: #eaf1ff;
   font-size: clamp(0.9rem, 3vw, 1rem);
   outline: none;
   box-sizing: border-box;
+  transition: border-color .25s ease, box-shadow .25s ease, transform .15s ease;
+  backdrop-filter: blur(6px);
 }
 
+/* Text inputs retain underline style */
+.inputBox input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  border-radius: 0;
+  padding: 10px;
+}
+
+/* Floating labels */
 .inputBox span {
   position: absolute;
-  left: 0;
+  left: 10px;
   top: 10px;
   pointer-events: none;
-  color: #aaa;
-  transition: 0.3s ease;
+  color: #9aa4b2;
+  transition: 0.25s ease;
   font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 .inputBox input:focus + span,
-.inputBox input:valid + span {
-  top: -15px;
+.inputBox input:valid + span,
+.inputBox select:focus + span,
+.inputBox select:valid + span {
+  top: -12px;
+  left: 6px;
   font-size: clamp(0.7rem, 2.5vw, 0.75rem);
   color: #03e9f4;
 }
+
+/* Select styling */
+.inputBox select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  color: #eaf1ff;
+  background-image:
+    linear-gradient(135deg, rgba(3,233,244,0.15), rgba(11,194,207,0.08)),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%2303e9f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
+  background-repeat: no-repeat, no-repeat;
+  background-position: 0 0, right 10px center;
+  background-size: auto, 18px;
+  padding-right: 42px;
+}
+
+.inputBox select:hover {
+  border-color: #03e9f4;
+  box-shadow: 0 0 10px rgba(3,233,244,0.25), 0 0 25px rgba(3,233,244,0.15);
+}
+
+.inputBox select:focus {
+  border-color: #03e9f4;
+  box-shadow: 0 0 0 2px rgba(3,233,244,0.25), 0 0 20px rgba(3,233,244,0.25);
+  transform: translateY(-1px);
+}
+
+/* Options */
+.inputBox select option {
+  background: #0b1020;
+  color: #eaf1ff;
+}
+
+/* Entrance animation */
+@keyframes popIn {
+  0% { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.inputBox select { animation: popIn .25s ease-out; }
 
 .loginBtn, .signupBtn {
   margin-top: 10px;
