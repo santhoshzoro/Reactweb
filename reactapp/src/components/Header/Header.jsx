@@ -54,7 +54,9 @@ const Header = () => {
             </div>
           </div>
           <div className="dropdown-sep" />
-          <Link className="dropdown-item" to="/dashboard" onClick={() => setOpen(false)}>Home</Link>
+          <Link className="dropdown-item" to="/" onClick={() => setOpen(false)}>Home</Link>
+          <Link className="dropdown-item" to="/about" onClick={() => setOpen(false)}>About Us</Link>
+          <Link className="dropdown-item" to="/signup" onClick={() => setOpen(false)}>Signup</Link>
           <Link className="dropdown-item" to="/employeeDirectory" onClick={() => setOpen(false)}>Employees</Link>
           <Link className="dropdown-item" to="/wiki" onClick={() => setOpen(false)}>Wiki</Link>
           <div className="dropdown-sep" />

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './login';
 import LightRays from '../lightrayslogin/LightRays/LightRays';
 import Dashboard from './dashboard';
@@ -10,22 +10,19 @@ import ActiveProjects from './ActiveProjects';
 import PerformanceDashboard from './PerformanceDashboard';
 import DepartmentGrowthDashboard from './DepartmentGrowthDashboard';
 import Wiki from './Wiki';
-
-
-
-
+import About from './About';
 
 function App() {
   // Use Vite's BASE_URL so dev is '/', prod is '/Reactweb/' - strip trailing slash
   const basename = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
 
   return (
-    <BrowserRouter basename={basename}>
+    <HashRouter basename={basename}>
       <Routes>
-        {/* Login page without footer */}
+        {/* Login page (also used for signup redirect) */}
         <Route path="/" element={<Login />} />
         
-        {/* All other pages with footer */}
+        {/* Content pages wrapped with layout */}
         <Route path="/lightrays" element={<Layout><LightRays /></Layout>} />
         <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         <Route path="/dashboardInner" element={<Layout><DashboardInner /></Layout>} />
@@ -35,12 +32,15 @@ function App() {
         <Route path="/PerformanceDashboard" element={<Layout><PerformanceDashboard /></Layout>} />
         <Route path="/DepartmentGrowthDashboard" element={<Layout><DepartmentGrowthDashboard /></Layout>} />
         <Route path="/wiki" element={<Layout><Wiki /></Layout>} />
-        
-        
-        
-        {/* Fallback route for unmatched paths */}
+        <Route path="/about" element={<Layout><About/></Layout>} />
+
+        {/* Signup should go to login page */}
+        <Route path="/signup" element={<Navigate to="/" replace />} />
+
+        {/* Fallback: redirect unknown routes to home */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
