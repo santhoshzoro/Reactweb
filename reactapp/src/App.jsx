@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './login';
 import LightRays from '../lightrayslogin/LightRays/LightRays';
 import Dashboard from './dashboard';
@@ -13,11 +13,8 @@ import Wiki from './Wiki';
 import About from './About';
 
 function App() {
-  // Use Vite's BASE_URL so dev is '/', prod is '/Reactweb/' - strip trailing slash
-  const basename = (import.meta.env.BASE_URL || '/').replace(/\/$/, '');
-
   return (
-    <HashRouter basename={basename}>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         {/* Login page (also used for signup redirect) */}
         <Route path="/" element={<Login />} />
@@ -40,7 +37,7 @@ function App() {
         {/* Fallback: redirect unknown routes to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 

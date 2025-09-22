@@ -41,7 +41,7 @@ const Dashboardinner = () => {
         </div>
         <div className='nav-links'>
           <a href="/dashboard">Home</a>
-          <a href="/aboutus">About us</a>
+          <a href="/about  " onClick={() => navigate('/about')}>About us</a>
           <a href="/login">signup</a>
         </div>
       </div>
