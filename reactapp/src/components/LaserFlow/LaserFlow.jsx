@@ -71,6 +71,11 @@ uniform float uFade;
 #define W_CURVE_RANGE (FLARE_HEIGHT - 3.0)
 #define W_BOTTOM_EXP 10.0
 
+float xS = 1.0;
+float rGate(float x, float w) {
+  return smoothstep(0.0, w, x) * (1.0 - smoothstep(1.0 - w, 1.0, x));
+}
+
 // Volumetric fog controls
 #define FOG_ON 1
 #define FOG_CONTRAST 1.2
@@ -113,7 +118,6 @@ uniform float uFade;
         return powr*min(1.0,r);
     }
     float tri01(float x){float f=fract(x);return 1.0-abs(f*2.0-1.0);}
-    float rGate(float x, float w){return 1.0-smoothstep(0.0,w,abs(x));}
     float tauWf(float t,float tmin,float tmax){float a=smoothstep(tmin,tmin+EDGE_SOFT,t),b=1.0-smoothstep(tmax-EDGE_SOFT,tmax,t);return max(0.0,a*b);}
     float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+34.123);return fract(p.x*p.y);}
     float vnoise(vec2 p){

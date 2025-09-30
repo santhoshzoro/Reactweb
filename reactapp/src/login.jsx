@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 import LightRays from '../lightrayslogin/LightRays/LightRays';
 import LaserFlow from './components/LaserFlow/LaserFlow';
+import CurvedLoop from './components/CurvedLoop/CurvedLoop';
 
 
 function Login() {
@@ -30,6 +31,15 @@ function Login() {
         <>
             {/* LightRays Background Effect */}
             <div className="light-rays-background">
+                <LaserFlow
+                    color="#03e9f4"
+                    flowSpeed={0.5}
+                    wispDensity={1.5}
+                    fogIntensity={0.3}
+                    verticalSizing={1.5}
+                    horizontalSizing={1.0}
+                    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+                />
                 <LaserFlow
                     color="#03e9f4"
                     flowSpeed={0.5}
