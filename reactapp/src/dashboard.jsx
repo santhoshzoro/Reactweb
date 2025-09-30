@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './dashboard.css';
 import Particles from '../background/Particles/Particles';
 
@@ -32,9 +31,9 @@ function dashboard() {
                     Techno
                 </div>
                 <div className='nav-links'>
-                    <a href="/dashboard">Home</a>
-                    <a href="/aboutus">About us</a>
-                    <a href="/login">signup</a>
+                    <Link to="/dashboard">Home</Link>
+                    <Link to="/about">About us</Link>
+                    <Link to="/">Signup</Link>
                 </div>
             </div>
             {/* Main Content */}
